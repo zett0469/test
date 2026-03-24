@@ -57,7 +57,7 @@ function sendAnswer(){
 	const answer = parseInt(selected.value);
 	const q = questions[currentQuestion];
 	
-	answeredQuestions[currentQuestion] = q.correct.includes(answer)
+	answeredQuestions[currentQuestion] = answer
 	
 	showFeedback();
 }
