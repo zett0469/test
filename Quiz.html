@@ -10,7 +10,7 @@
     <meta name="page-topic" content="Quiz">
 	
 	<link rel="stylesheet" href="styles/quiz.css">
-	<!--script type="text/javascript" src="scripts/frontend.js"></script-->
+	
 	<script type="text/javascript" src="scripts/questions.js"></script>
 	<script type="text/javascript" src="scripts/quiz_logic.js"></script>
 </head>
@@ -58,9 +58,9 @@
 			<button onclick="nextQuestion()">→</button>
 		</div>
 		
-		<div id="feedback">Die Antwort ist richtig</div>
+		<div id="feedback">X</div>
 		
-		<button id="submit-btn">Antwort absenden</button>
+		<button id="submit-btn" onclick="sendAnswer()">Antwort absenden</button>
 	</div>
 
 </body>
