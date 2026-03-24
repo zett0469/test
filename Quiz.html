@@ -10,7 +10,9 @@
     <meta name="page-topic" content="Quiz">
 	
 	<link rel="stylesheet" href="styles/quiz.css">
-	<script type="text/javascript" src="scripts/frontend.js"></script>
+	<!--script type="text/javascript" src="scripts/frontend.js"></script-->
+	<script type="text/javascript" src="scripts/questions.js"></script>
+	<script type="text/javascript" src="scripts/quiz_logic.js"></script>
 </head>
 <body>
 	<div class="quiz_frame">
@@ -29,7 +31,7 @@
 		</div>
 		
 		<div class="quiz_container">
-			<button id="prev-btn">←</button>
+			<button onclick="prevQuestion()">←</button>
 
 			<div id="question-box">
 				<h3>Frage 0. Platzhalter</h3>
@@ -53,7 +55,7 @@
 				</label>
 			</div>
 
-			<button id="next-btn">→</button>
+			<button onclick="nextQuestion()">→</button>
 		</div>
 		
 		<div id="feedback">Die Antwort ist richtig</div>
