@@ -1,0 +1,165 @@
+/* --- Grundlayout --- */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 40px 0;
+    display: flex;
+    justify-content: center;
+}
+
+body.index-page {
+    flex-direction: column;
+    align-items: center;
+    padding: 60px 20px;
+}
+
+.quiz_frame {
+    background: #fff;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    padding: 30px 40px;
+    max-width: 700px;
+    width: 90%;
+}
+
+/* --- Fortschrittsleiste --- */
+.quiz_progressbar {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 25px;
+}
+
+.quiz_progressbar span {
+    flex: 1;
+    text-align: center;
+    padding: 8px 0;
+    margin: 0 2px;
+    border-radius: 8px;
+    background: #e0e0e0;
+    font-weight: bold;
+    transition: background 0.3s, color 0.3s;
+}
+
+.quiz_progressbar span.active {
+    background: #007BFF;
+    color: #fff;
+}
+
+/* --- Quiz Container --- */
+.quiz_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* <-- vertikal zentriert */
+    margin-bottom: 20px;
+    gap: 20px;
+}
+
+/* Buttons */
+button {
+    background-color: #007BFF;
+    border: none;
+    color: #fff;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+#prev-btn, #next-btn {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    flex-shrink: 0;
+    height: 50px; /* gleiche Höhe wie die Antwortboxen */
+}
+
+#prev-btn:hover, #next-btn:hover {
+    background-color: #0056b3;
+}
+
+#submit-btn {
+    display: block;
+    margin: 20px auto 0 auto;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    background-color: #007BFF;
+    color: #fff;
+    cursor: pointer;
+}
+
+#submit-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Question Box */
+#question-box {
+    flex: 1;
+}
+
+/* Radio Buttons */
+label {
+    display: flex;
+    align-items: center;
+    margin: 6px 0;
+    padding: 12px 15px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    background-color: #f9f9f9;
+}
+
+label:hover {
+    background-color: #e6f0ff;
+}
+
+input[type="radio"] {
+    margin-right: 12px;
+}
+
+/* Checked Effekt */
+input[type="radio"]:checked + strong,
+input[type="radio"]:checked {
+    background-color: #cce0ff;
+    border-color: #007BFF;
+}
+
+/* Feedback Box */
+#feedback {
+    margin-top: 20px;
+    padding: 12px 15px;
+    border-radius: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#feedback.correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+#feedback.wrong {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}

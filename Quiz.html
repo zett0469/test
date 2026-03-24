@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Social Engineering Quiz</title>
+    <meta name="description" content="Ein Quiz zum Thema Social Engineering">
+    <meta name="language" content="de">
+    <meta name="publisher" content="FI25_1 (Amon, Brian, Corven, Leon, Leonard, Shahin)">
+    <meta name="page-topic" content="Quiz">
+	
+	<link rel="stylesheet" href="styles/quiz.css">
+	<script type="text/javascript" src="scripts/frontend.js"></script>
+</head>
+<body>
+	<div class="quiz_frame">
+		<div class="quiz_progressbar">
+			<span class="step_1">1</span>
+			<span class="step_2">2</span>
+			<span class="step_3">3</span>
+			<span class="step_4">4</span>
+			<span class="step_5">5</span>
+			<span class="step_6">6</span>
+			<span class="step_7">7</span>
+			<span class="step_8">8</span>
+			<span class="step_9">9</span>
+			<span class="step_10">10</span>
+			<span class="step_result">Ergebnis</span>
+		</div>
+		
+		<div class="quiz_container">
+			<button id="prev-btn">←</button>
+
+			<div id="question-box">
+				<h3>Frage 0. Platzhalter</h3>
+				<p>Das ist eine Platzhalterfrage</p>
+
+				<label>
+					<input type="radio" name="q" value="0">
+					<strong>A:</strong> Bli
+				</label>
+				<label>
+					<input type="radio" name="q" value="1">
+					<strong>B:</strong> Bla
+				</label>
+				<label>
+					<input type="radio" name="q" value="2">
+					<strong>C:</strong> Ble
+				</label>
+				<label>
+					<input type="radio" name="q" value="3">
+					<strong>D:</strong> Blo
+				</label>
+			</div>
+
+			<button id="next-btn">→</button>
+		</div>
+		
+		<div id="feedback">Die Antwort ist richtig</div>
+		
+		<button id="submit-btn">Antwort absenden</button>
+	</div>
+
+</body>
+</html>
