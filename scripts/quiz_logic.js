@@ -1,5 +1,5 @@
 let currentQuestion = 0;
-let answeredQuestions = [-1, 0, 1, 2, 3, -1, -1, -1, -1, -1]; 
+let answeredQuestions = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]; 
 
 function prevQuestion(){
 	if(currentQuestion > 0){
