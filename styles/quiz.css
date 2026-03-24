@@ -7,6 +7,8 @@ body {
     padding: 40px 0;
     display: flex;
     justify-content: center;
+	align-items: flex-start;
+	min-height: 100vh;
 }
 
 body.index-page {
@@ -22,6 +24,34 @@ body.index-page {
     padding: 30px 40px;
     max-width: 700px;
     width: 90%;
+}
+
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+    }
+
+    .quiz_frame {
+        width: 95%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+
+    p {
+        text-align: center;
+        font-size: 1rem;
+    }
+
+    button {
+        font-size: 16px;
+    }
 }
 
 /* --- Fortschrittsleiste --- */
