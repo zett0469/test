@@ -1,5 +1,6 @@
 let currentQuestion = 0;
-let answeredQuestions = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1]; 
+let answeredQuestions = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1]; 
+
 
 function prevQuestion(){
 	if(currentQuestion > 0){
@@ -9,9 +10,21 @@ function prevQuestion(){
 }
 
 function nextQuestion(){
-	if(currentQuestion < 9){
+	if(allAnswered()){
+		max_scroll_val = 10;
+	}
+	else{
+		max_scroll_val = 9;
+	}
+	
+	if(currentQuestion < max_scroll_val){
 		currentQuestion += 1;
-		showQuestion(currentQuestion);
+		if(currentQuestion < 10){
+			showQuestion(currentQuestion);
+		}
+		else{
+			showResults();
+		}
 	}
 }
 
@@ -37,20 +50,34 @@ function showQuestion(index){
 	});
 
 	box.innerHTML = html;
-	
+
+	document.getElementById("feedback").classList.add("hidden");
+
 	// Zeige das bereits gewählte, wenn was bereits gewählt wurde.
 	showFeedback();
+	updateProgressbar();
+	updateButtonText()
 }
+
 
 function sendAnswer(){
 	//TO DO:
-	//- Antworten nur möglich machen, wenn noch keine gewählt wurde
-	//- Richtige Antwort einfärben
-	//- Falsche Antwort einfärben
 	//- Ergebnisse zeigen wenn alles beantwortet wurde
 	const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
 	
+	if(currentQuestion == 10){
+		location.reload();
+	}
+	else if(allAnswered()){
+		currentQuestion = 10;
+		showResults();
+	}
+	
 	if (!selected) {
+		return;
+	}
+	
+	if(answeredQuestions[currentQuestion] != -1){
 		return;
 	}
 	
@@ -60,32 +87,115 @@ function sendAnswer(){
 	answeredQuestions[currentQuestion] = answer
 	
 	showFeedback();
+	updateProgressbar();
+	updateButtonText()
 }
+
 
 function showFeedback(){
 	const feedback_box = document.getElementById("feedback");
-	
-	if(answeredQuestions[currentQuestion] != -1){
-		pickedOption = document.querySelector(`input[name="q${currentQuestion}"][value="${answeredQuestions[currentQuestion]}"]`);
-		
-		if(pickedOption != null){
-			pickedOption.checked = true;
-		}
-		
-		if(answeredQuestions[currentQuestion] == questions[currentQuestion].correct[0]){
-			feedback_msg = `Die Antwort ist richtig:<br>`;
-		}
-		else{
-			feedback_msg = `Die Antwort ist falsch:<br>`;
-		}
-		
-		feedback_msg += `${questions[currentQuestion].explanation}`;
-		
-		feedback_box.innerHTML = feedback_msg;
+	let feedback_msg = "";
+
+	const selectedValue = answeredQuestions[currentQuestion];
+	if(selectedValue === -1){
+		feedback_box.innerHTML = "";
+		return;
 	}
 	else{
-		feedback_box.innerHTML = ``;
+		document.querySelectorAll(`input[name="q${currentQuestion}"]`)
+			.forEach(input => input.disabled = true);
 	}
+
+	const correctValue = questions[currentQuestion].correct[0];
+
+	const selectedInput = document.querySelector(
+		`input[name="q${currentQuestion}"][value="${selectedValue}"]`
+	);
+
+	const correctInput = document.querySelector(
+		`input[name="q${currentQuestion}"][value="${correctValue}"]`
+	);
+
+	const selectedLabel = selectedInput?.parentElement;
+	const correctLabel = correctInput?.parentElement;
+
+	// Reset
+	document.querySelectorAll(`input[name="q${currentQuestion}"]`).forEach(input => {
+		input.parentElement.classList.remove("correct", "wrong", "solution");
+	});
+
+	// ⭐ richtige Antwort IMMER markieren
+	if(selectedValue === correctValue){
+		selectedLabel.classList.add("correct");
+		feedback_msg = "Die Antwort ist richtig:<br>";
+	} else {
+		selectedLabel.classList.add("wrong");
+		correctLabel.classList.add("solution");
+		feedback_msg = "Die Antwort ist falsch:<br>";
+	}
+
+	feedback_msg += questions[currentQuestion].explanation;
+	feedback_box.innerHTML = feedback_msg;
+	
+	document.getElementById("feedback").classList.remove("hidden");
+}
+
+function showResults(){
+	const box = document.getElementById("question-box");
+	var correct_ones = 0;
+	
+	for(i = 0; i < 10; i++){
+		if(answeredQuestions[i] == questions[i].correct[0]){
+			correct_ones += 1;
+		}
+	}
+	
+
+	let html = `
+	<h3>Ergebnis</h3>
+	<p>Du hast ${correct_ones} von 10 Fragen richtig</p>
+	`;
+
+	box.innerHTML = html;
+
+	document.getElementById("feedback").classList.add("hidden");
+
+	// Zeige das bereits gewählte, wenn was bereits gewählt wurde.
+	showFeedback();
+	updateProgressbar();
+	updateButtonText();
+}
+
+function updateButtonText(){
+	if(currentQuestion == 10){
+		document.getElementById("submit-btn").innerText = "Neues Quiz erstellen";
+	}
+	else{
+		if(allAnswered()){
+			document.getElementById("submit-btn").innerText = "Ergebnisse anzeigen";
+		}
+	}
+}
+
+function updateProgressbar(){
+	const steps = document.querySelectorAll(".quiz_progressbar span");
+
+	steps.forEach((step, index) => {
+
+		step.classList.remove("active", "correct-step", "wrong-step");
+
+		if(index === currentQuestion){
+			step.classList.add("active");
+		}
+
+		if(answeredQuestions[index] !== -1){
+			if(answeredQuestions[index] === questions[index].correct[0]){
+				step.classList.add("correct-step");
+			} else {
+				step.classList.add("wrong-step");
+			}
+		}
+	});
 }
 
 function randomizeQuestions(array){
@@ -98,8 +208,19 @@ function randomizeQuestions(array){
 	return array;
 }
 
+function allAnswered(){
+	for(i = 0; i < 10; i++){
+		if(answeredQuestions[i] == -1){
+			return false;
+		}
+	}
+	
+	return true;
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     document.querySelector(".step_result").classList.add(".hidden"); 
 	randomizeQuestions(questions);
 	showQuestion(0);
+	updateProgressbar();
 });
