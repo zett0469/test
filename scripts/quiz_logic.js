@@ -61,8 +61,6 @@ function showQuestion(index){
 
 
 function sendAnswer(){
-	//TO DO:
-	//- Ergebnisse zeigen wenn alles beantwortet wurde
 	const selected = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
 	
 	if(currentQuestion == 10){
@@ -153,8 +151,36 @@ function showResults(){
 
 	let html = `
 	<h3>Ergebnis</h3>
-	<p>Du hast ${correct_ones} von 10 Fragen richtig</p>
+	<p>Du hast ${correct_ones} von 10 Fragen richtig</p><br>
 	`;
+	
+	switch(correct_ones){
+		case 10:
+			html += `<p>Sieht so aus, als macht dir in Sachen Social Engineering keiner so schnell etwas vor.</p>
+			<p>Wenn du möchtest kannst du über den Button unten aber noch einmal ein neues Quiz probieren.</p>`
+			break;
+		case 9:
+		case 8:
+			html += `<p>Du bist schon ganz gut dabei, aber es gibt noch einige Dinge die du dir vor Augen rufen solltest.</p>
+			<p>Probiere dich doch an einem neuen Quiz, um noch mehr über Social Engineering zu lernen und dich vor potentiellen Gefahren zu schützen.</p>`
+			break;
+		case 7:
+		case 6:
+		case 5:
+			html += `<p>Nicht schlecht, aber für dich gibt es noch einiges zum Thema zu lernen.</p>
+			<p>Versuche dich doch an einem neuen Quiz, um mehr über Social Engineering zu lernen.</p>`
+			break;
+		case 4:
+		case 3:
+		case 2:
+		case 1:
+		case 0:
+			html += `<p>Scheint so, als gäbe es für dich noch viel über das Thema Social Engineering zu lernen.</p>
+			<p>Probiere dich gern an einem weiteren Quiz, um zu lernen wie du dich vor den Gefahren schützen kannst.</p>`
+			break;
+		default:
+			break;
+	}
 
 	box.innerHTML = html;
 
