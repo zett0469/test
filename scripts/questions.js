@@ -61,7 +61,7 @@ const questions = [
 	},
     {
 	question: "Warum funktioniert Social Engineering oft?",
-	options: ["Software ist unsicher", "Menschen handeln vertrauensvoll oder unachtsam", "Hardware ist veraltet", "Menschen handeln vertrauensvoll oder unachtsam"],
+	options: ["Software ist unsicher", "Firewalls können solche Angriffe nicht erkennen", "Hardware ist veraltet", "Menschen handeln vertrauensvoll oder unachtsam"],
 	correct: [3],
 	explanation: "Technische Systeme sind oft sicher, aber Menschen reagieren impulsiv oder vertrauensvoll."
 	},
